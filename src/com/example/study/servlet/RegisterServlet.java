@@ -11,14 +11,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.example.study.model.User;
 import com.example.study.service.UserService;
 import com.google.gson.Gson;
 
-@WebServlet("/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/register")
+public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public LoginServlet() {
+	public RegisterServlet() {
 		super();
 	}
 
@@ -31,8 +32,14 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		response.setContentType("text/html;charset=utf-8");
+		User user = new User();
+		user.setNumber(request.getParameter("number"));
+		user.setName(request.getParameter("name"));
+		user.setPassword(request.getParameter("password"));
+		user.setEmail(request.getParameter("email"));
+		user.setSchool(request.getParameter("school"));
+		user.setSex(request.getParameter("sex"));
+		// TODO user头像的处理
 
 		UserService userService = new UserService();
 
@@ -40,14 +47,11 @@ public class LoginServlet extends HttpServlet {
 		Gson g = new Gson();
 		Map<String, Object> map = new LinkedHashMap<String, Object>();
 
-		if (request.getParameter("email") != null && request.getParameter("password") != null) {
-			map = userService.login(request.getParameter("email"), request.getParameter("password"));
-
-		} else {
-			map.put("status", "false");
-		}
+		map = userService.register(user);
 		out.print(g.toJson(map));
+
 		out.close();
+
 	}
 
 }

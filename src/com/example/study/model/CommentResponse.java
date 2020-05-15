@@ -1,21 +1,13 @@
 package com.example.study.model;
 
-public class Course {
+public class CommentResponse {
 
 	private int id;
-	private String name;
+	private String userId;
+	private String time;
 	private String detail;
-	private String owner;
+	private String name;
 	private String picture;
-	private String sort;
-
-	public String getSort() {
-		return sort;
-	}
-
-	public void setSort(String sort) {
-		this.sort = sort;
-	}
 
 	public int getId() {
 		return id;
@@ -25,12 +17,20 @@ public class Course {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
 	}
 
 	public String getDetail() {
@@ -41,12 +41,12 @@ public class Course {
 		this.detail = detail;
 	}
 
-	public String getOwner() {
-		return owner;
+	public String getName() {
+		return name;
 	}
 
-	public void setOwner(String owner) {
-		this.owner = owner;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getPicture() {

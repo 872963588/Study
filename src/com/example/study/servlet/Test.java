@@ -18,7 +18,8 @@ import com.example.study.dao.TaskDao;
 import com.example.study.dao.UserDao;
 import com.example.study.model.Course;
 import com.example.study.model.Task;
-import com.example.study.model.User;
+import com.example.study.service.CourseService;
+import com.example.study.service.UserService;
 import com.google.gson.Gson;
 
 @WebServlet("/test")
@@ -32,7 +33,7 @@ public class Test extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setContentType("text/html;charset=utf-8");
+		// response.setContentType("text/html;charset=utf-8");
 
 		CourseDao courseDao = new CourseDao();
 		List<Course> courses = new ArrayList<Course>();
@@ -67,22 +68,91 @@ public class Test extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setContentType("text/html;charset=utf-8");
-		User user = new User();
-		UserDao userDao = new UserDao();
-		if (request.getParameter("userEmail") != null) {
-			// user = userDao.getUserByEmail(request.getParameter("userEmail"));
-		} else {
-			user = null;
-		}
+//		response.setContentType("text/html;charset=utf-8");
+//		User user = new User();
+//		UserDao userDao = new UserDao();
+//		if (request.getParameter("userEmail") != null) {
+//			// user = userDao.getUserByEmail(request.getParameter("userEmail"));
+//		} else {
+//			user = null;
+//		}
+//		PrintWriter out = response.getWriter();
+//		Gson g = new Gson();
+//		Map<String, Object> map = new LinkedHashMap<String, Object>();
+//
+//		map.put("status", "ok");
+//		map.put("query", "Lucy");
+//		map.put("user", user);
+//
+//		out.print(g.toJson(map));
+//		out.close();
+
+		// 测试更新user密码
+//		UserService userService = new UserService();
+//		PrintWriter out = response.getWriter();
+//		Gson g = new Gson();
+//		Map<String, Object> map = new LinkedHashMap<String, Object>();
+//
+//		map = userService.updatePassword(1);
+//		out.print(g.toJson(map));
+//
+//		out.close();
+
+		// 测试更新user信息
+//		User user = new User();
+//		user.setNumber(request.getParameter("number"));
+//		user.setName(request.getParameter("name"));
+//		// user.setPassword(request.getParameter("password"));
+//		user.setEmail(request.getParameter("email"));
+//		user.setSchool(request.getParameter("school"));
+//		user.setSex(request.getParameter("sex"));
+//
+		UserService userService = new UserService();
+//		PrintWriter out = response.getWriter();
+//		Gson g = new Gson();
+//		Map<String, Object> map = new LinkedHashMap<String, Object>();
+//
+//		map = userService.updateUserInfo(user, Integer.parseInt(request.getParameter("id")));
+//		out.print(g.toJson(map));
+//
+//		out.close();
+
 		PrintWriter out = response.getWriter();
 		Gson g = new Gson();
 		Map<String, Object> map = new LinkedHashMap<String, Object>();
+		UserDao userDao = new UserDao();
+		// 测试获取课程相应班级的用户
+//		List<Integer> usersId = new ArrayList<Integer>();
+//		usersId = userDao.getUsersIdByCourse(1, 1);
+//
+//		map.put("status", "ok");
+//		map.put("query", "Lucy");
+//		map.put("courses", courses);
+//		map.put("tasks", tasks);
 
-		map.put("status", "ok");
-		map.put("query", "Lucy");
-		map.put("user", user);
+		// map = userService.updateUserInfo(user,
+		// Integer.parseInt(request.getParameter("id")));
 
+		// 测试获取课程相应班级 此处应该在class表 先延后一下
+
+		// 测试根据用户Id获取用户信息
+
+//		if (request.getParameter("id") != null) {
+//			map = userService.getUserById(Integer.parseInt(request.getParameter("id")));
+//			out.print(g.toJson(map));
+//		} else {
+//			out.print("参数为空");
+//		}
+		// 测试删除课程
+		CourseService courseService = new CourseService();
+		if (request.getParameter("id") != null) {
+			map = courseService.deleteCourseById(Integer.parseInt(request.getParameter("id")));
+
+		} else if (request.getParameter("name") != null) {
+			map = courseService.searchCoursesByName(request.getParameter("name"));
+		} else {
+			map.put("status", "false");
+		}
 		out.print(g.toJson(map));
 		out.close();
 	}

@@ -2,9 +2,9 @@ package com.example.study.model;
 
 public class Task {
 	private int id;
-	private String taskName;
-	private String taskTime;
-	private String taskDetail;
+	private String name;
+	private String time;
+	private String detail;
 	private String courseId;
 	private String fileType;
 	private String fileUrl;
@@ -17,28 +17,28 @@ public class Task {
 		this.id = id;
 	}
 
-	public String getTaskName() {
-		return taskName;
+	public String getName() {
+		return name;
 	}
 
-	public void setTaskName(String taskName) {
-		this.taskName = taskName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getTaskTime() {
-		return taskTime;
+	public String getTime() {
+		return time;
 	}
 
-	public void setTaskTime(String taskTime) {
-		this.taskTime = taskTime;
+	public void setTime(String time) {
+		this.time = time;
 	}
 
-	public String getTaskDetail() {
-		return taskDetail;
+	public String getDetail() {
+		return detail;
 	}
 
-	public void setTaskDetail(String taskDetail) {
-		this.taskDetail = taskDetail;
+	public void setDetail(String detail) {
+		this.detail = detail;
 	}
 
 	public String getCourseId() {

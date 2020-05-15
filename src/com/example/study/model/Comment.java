@@ -4,8 +4,8 @@ public class Comment {
 
 	private int id;
 	private String userId;
-	private String commentTime;
-	private String commentDetail;
+	private String time;
+	private String detail;
 	private String courseId;
 	private String taskId;
 
@@ -25,20 +25,20 @@ public class Comment {
 		this.userId = userId;
 	}
 
-	public String getCommentTime() {
-		return commentTime;
+	public String getTime() {
+		return time;
 	}
 
-	public void setCommentTime(String commentTime) {
-		this.commentTime = commentTime;
+	public void setTime(String time) {
+		this.time = time;
 	}
 
-	public String getCommentDetail() {
-		return commentDetail;
+	public String getDetail() {
+		return detail;
 	}
 
-	public void setCommentDetail(String commentDetail) {
-		this.commentDetail = commentDetail;
+	public void setDetail(String detail) {
+		this.detail = detail;
 	}
 
 	public String getCourseId() {

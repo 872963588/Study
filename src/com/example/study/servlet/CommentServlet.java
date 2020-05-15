@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.example.study.model.Comment;
 import com.example.study.service.CommentService;
 import com.google.gson.Gson;
 
@@ -34,11 +35,14 @@ public class CommentServlet extends HttpServlet {
 
 		if (request.getParameter("courseId") != null) {
 			map = commentService.getCommentsByCourseId(Integer.parseInt(request.getParameter("courseId")));
-			out.print(g.toJson(map));
-		} else {
-			out.print("参数为空");
-		}
 
+		} else if (request.getParameter("taskId") != null) {
+			map = commentService.getCommentsByTaskId(Integer.parseInt(request.getParameter("taskId")));
+
+		} else {
+			map.put("status", "false");
+		}
+		out.print(g.toJson(map));
 		out.close();
 
 	}
@@ -46,7 +50,30 @@ public class CommentServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doGet(request, response);
+		CommentService commentService = new CommentService();
+		PrintWriter out = response.getWriter();
+		Gson g = new Gson();
+		Map<String, Object> map = new LinkedHashMap<String, Object>();
+
+		if (request.getParameter("courseId") != null) {
+			Comment comment = new Comment();
+			comment.setUserId(request.getParameter("userId"));
+			comment.setDetail(request.getParameter("detail"));
+			comment.setCourseId(request.getParameter("courseId"));
+			map = commentService.addCourseComment(comment);
+
+		} else if (request.getParameter("taskId") != null) {
+			Comment comment = new Comment();
+			comment.setUserId(request.getParameter("userId"));
+			comment.setDetail(request.getParameter("detail"));
+			comment.setTaskId(request.getParameter("taskId"));
+			map = commentService.addTaskComment(comment);
+		} else {
+			map.put("status", "false");
+		}
+		out.print(g.toJson(map));
+		out.close();
+
 	}
 
 }

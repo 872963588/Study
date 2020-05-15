@@ -11,6 +11,6 @@
     User user = (User)session.getAttribute("USER");
   %>
   <body>
-	Welcome <%=user.getUserName() %>
+	Welcome <%=user.getName() %>
   </body>
 </html>
