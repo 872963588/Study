@@ -265,4 +265,33 @@ public class CourseDao {
 
 	}
 
+	// 更新图片
+	public String updateCourseImg(int id, String name) {
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String status = "false";
+		try {
+			conn = DBUtil.getConnection();
+			stmt = conn.prepareStatement("UPDATE course SET picture=? where id=?");
+			stmt.setString(1, "http://47.93.59.28:8080/Study/images/" + name);
+			stmt.setInt(2, id);
+
+			// TODO 照片
+			stmt.executeUpdate();
+
+			status = "true";
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DBException();
+		} finally {
+			DBUtil.close(rs, stmt, conn);
+		}
+
+		return status;
+
+	}
+
 }

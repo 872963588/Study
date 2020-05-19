@@ -120,7 +120,7 @@
 </form>
 <br/>
 添加任务
-<form action="course" method="post" id="loginForm">
+<form action="task" method="post" id="loginForm">
 <input type="text" name="name"  value="哈哈哈" />
 <input type="text" name="time"  value="哈哈哈" />
 <input type="text" name="detail"  value="1" />
@@ -163,6 +163,13 @@
 <input type="text" name="userId"  value="1" />
 <input type="text" name="detail"  value="哈哈哈" />
 <input type="text" name="taskId"  value="1" />
+<input type="submit" name="提交"/>
+</form>
+<br/>
+
+修改图片
+<form action="test" method="get" id="loginForm">
+
 <input type="submit" name="提交"/>
 </form>
 <br/>

@@ -36,7 +36,9 @@ public class CourseService {
 		courseDao.addCourse(course);
 		String status = "false";
 		if (course.getId() > 0) {
-			status = "true";
+			// status = String.valueOf(course.getId());
+			status = "course_" + course.getId();
+			// status = "true";
 		}
 		Map<String, Object> map = new LinkedHashMap<String, Object>();
 

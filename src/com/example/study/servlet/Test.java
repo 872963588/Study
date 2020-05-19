@@ -2,9 +2,7 @@ package com.example.study.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -14,10 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.example.study.dao.CourseDao;
-import com.example.study.dao.TaskDao;
 import com.example.study.dao.UserDao;
-import com.example.study.model.Course;
-import com.example.study.model.Task;
 import com.example.study.service.CourseService;
 import com.example.study.service.UserService;
 import com.google.gson.Gson;
@@ -36,33 +31,34 @@ public class Test extends HttpServlet {
 		// response.setContentType("text/html;charset=utf-8");
 
 		CourseDao courseDao = new CourseDao();
-		List<Course> courses = new ArrayList<Course>();
-		if (request.getParameter("userId") != null) {
-			// courses =
-			// courseDao.getCourseByUserId(Integer.parseInt(request.getParameter("userId")));
-		} else {
-			courses = courseDao.getAllCourses();
-		}
-		// List<Course> courses = courseDao.getCourseByUserId(1);
-		PrintWriter out = response.getWriter();
-		Gson g = new Gson();
-		Map<String, Object> map = new LinkedHashMap<String, Object>();
-		//
-		TaskDao taskDao = new TaskDao();
-		List<Task> tasks = new ArrayList<Task>();
-		// tasks = taskDao.getTaskByCourseId(1);
-
-		map.put("status", "ok");
-		map.put("query", "Lucy");
-		map.put("courses", courses);
-		map.put("tasks", tasks);
-
-		out.print(g.toJson(map));
-//		for (Course course : courses) {
-//			out.print(course.toString());
+//		List<Course> courses = new ArrayList<Course>();
+//		if (request.getParameter("userId") != null) {
+//			// courses =
+//			// courseDao.getCourseByUserId(Integer.parseInt(request.getParameter("userId")));
+//		} else {
+//			courses = courseDao.getAllCourses();
 //		}
-
-		out.close();
+//		// List<Course> courses = courseDao.getCourseByUserId(1);
+//		PrintWriter out = response.getWriter();
+//		Gson g = new Gson();
+//		Map<String, Object> map = new LinkedHashMap<String, Object>();
+//		//
+//		TaskDao taskDao = new TaskDao();
+//		List<Task> tasks = new ArrayList<Task>();
+//		// tasks = taskDao.getTaskByCourseId(1);
+//
+//		map.put("status", "ok");
+//		map.put("query", "Lucy");
+//		map.put("courses", courses);
+//		map.put("tasks", tasks);
+//
+//		out.print(g.toJson(map));
+////		for (Course course : courses) {
+////			out.print(course.toString());
+////		}
+//
+//		out.close();
+		courseDao.updateCourseImg(1, "123456");
 	}
 
 	@Override
