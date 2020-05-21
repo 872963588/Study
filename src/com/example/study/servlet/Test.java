@@ -149,8 +149,10 @@ public class Test extends HttpServlet {
 		} else {
 			map.put("status", "false");
 		}
+		map.put("status", "true");
 		out.print(g.toJson(map));
 		out.close();
+
 	}
 
 }

@@ -102,4 +102,31 @@ public class TaskDao {
 		return status;
 	}
 
+	public String updateTaskFile(int id, String name) {
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String status = "false";
+		try {
+			conn = DBUtil.getConnection();
+			stmt = conn.prepareStatement("UPDATE task SET file_type=?,file_url=? where id=?");
+			stmt.setString(1, name.substring(name.lastIndexOf(".") + 1));
+			stmt.setString(2, "http://47.93.59.28:8080/Study/files/" + name);
+			stmt.setInt(3, id);
+
+			stmt.executeUpdate();
+			status = "true";
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DBException();
+		} finally {
+			DBUtil.close(rs, stmt, conn);
+		}
+
+		return status;
+
+	}
+
 }

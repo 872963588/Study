@@ -73,6 +73,15 @@ public class UserServlet extends HttpServlet {
 				// 修改用户密码
 				map = userService.updatePassword(request.getParameter("password"),
 						Integer.parseInt(request.getParameter("id")));
+			} else if ("add".equals(type)) {
+				// 加入课程
+				int userId = Integer.parseInt(request.getParameter("userId"));
+				int courseId = Integer.parseInt(request.getParameter("courseId"));
+				map = userService.addStudyCourse(userId, courseId);
+			} else if ("del".equals(type)) {
+				// 退出课程
+				map = userService.delStudyCourse(Integer.parseInt(request.getParameter("userId")),
+						Integer.parseInt(request.getParameter("courseId")));
 			} else {
 				map.put("status", "false");
 			}

@@ -223,4 +223,87 @@ public class UserDao {
 //		return user;
 //
 //	}
+	public String updateCourseImg(int id, String name) {
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String status = "false";
+		try {
+			conn = DBUtil.getConnection();
+			stmt = conn.prepareStatement("UPDATE user SET picture=? where id=?");
+			stmt.setString(1, "http://47.93.59.28:8080/Study/images/" + name);
+			stmt.setInt(2, id);
+
+			// TODO 照片
+			stmt.executeUpdate();
+
+			status = "true";
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DBException();
+		} finally {
+			DBUtil.close(rs, stmt, conn);
+		}
+
+		return status;
+
+	}
+
+	// 用户加入课程
+	public String addStudyCourse(int userId, int courseId) {
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String status = "false";
+
+		try {
+			conn = DBUtil.getConnection();
+			stmt = conn.prepareStatement("INSERT INTO user_course_class(user_id,course_id) VALUES(?,?)",
+					Statement.RETURN_GENERATED_KEYS);
+			stmt.setInt(1, userId);
+			stmt.setInt(2, courseId);
+			stmt.executeUpdate();
+			rs = stmt.getGeneratedKeys();
+			if (rs.next()) {
+				status = "true";
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DBException();
+		} finally {
+			DBUtil.close(rs, stmt, conn);
+		}
+		return status;
+
+	}
+
+	// 用户退出课程
+	public String delStudyCourse(int userId, int courseId) {
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String status = "false";
+
+		try {
+			conn = DBUtil.getConnection();
+			stmt = conn.prepareStatement("DELETE FROM user_course_class WHERE user_id=? AND course_id=?");
+
+			stmt.setInt(1, userId);
+			stmt.setInt(2, courseId);
+			stmt.executeUpdate();
+			status = "true";
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DBException();
+		} finally {
+			DBUtil.close(rs, stmt, conn);
+		}
+		return status;
+
+	}
+
 }

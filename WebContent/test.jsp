@@ -48,6 +48,23 @@
 </form>
 <br/>
 
+加入课程
+<form action="user" method="post" id="loginForm">
+<input type="text" name="userId"  value="3" />
+<input type="text" name="courseId"  value="3" />
+<input type="text" name="type"  value="add" />
+<input type="submit" name="提交"/>
+</form>
+<br/>
+
+退出课程
+<form action="user" method="post" id="loginForm">
+<input type="text" name="userId"  value="3" />
+<input type="text" name="courseId"  value="3" />
+<input type="text" name="type"  value="del" />
+<input type="submit" name="提交"/>
+</form>
+<br/>
 根据课程班级查询学习用户
 <form action="user" method="get" id="loginForm">
 <input type="text" name="courseId"  value="1" />
@@ -173,6 +190,13 @@
 <input type="submit" name="提交"/>
 </form>
 <br/>
+
+
+测试上传
+<form action="file" method="post" id="loginForm">
+
+<input type="submit" name="提交"/>
+</form>
 <br/>
 
 </body>

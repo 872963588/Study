@@ -5,7 +5,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,6 +23,8 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 
 import com.example.study.dao.CourseDao;
+import com.example.study.dao.UserDao;
+import com.google.gson.Gson;
 
 @WebServlet("/img")
 public class ImgServlet extends HttpServlet {
@@ -38,6 +43,12 @@ public class ImgServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter print = response.getWriter();
+		Gson g = new Gson();
+		Map<String, Object> map = new LinkedHashMap<String, Object>();
+
 		// 获得磁盘文件条月工厂
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		// 获取文件需要上传到的路径
@@ -78,11 +89,21 @@ public class ImgServlet extends HttpServlet {
 					// 更新数据库
 					int index1 = filename.lastIndexOf("_");
 					int index2 = filename.lastIndexOf(".");
+					String type = filename.substring(0, index1);
+
 					int id = Integer.parseInt(filename.substring(index1 + 1, index2));
 					// String imgname = value.substring(0, index);
 					// int id = Integer.parseInt(imgname.substring(imgname.lastIndexOf("_")+1));
-					CourseDao courseDao = new CourseDao();
-					courseDao.updateCourseImg(id, filename);
+
+					if ("course".equals(type)) {
+						CourseDao courseDao = new CourseDao();
+						courseDao.updateCourseImg(id, filename);
+					} else if ("user".equals(type)) {
+						UserDao userDao = new UserDao();
+						userDao.updateCourseImg(id, filename);
+					} else {
+
+					}
 
 					OutputStream out = new FileOutputStream(new File(path, filename));
 					InputStream in = item.getInputStream();
@@ -94,6 +115,7 @@ public class ImgServlet extends HttpServlet {
 					}
 					in.close();
 					out.close();
+
 				}
 			}
 		} catch (FileUploadException e) {
@@ -101,6 +123,9 @@ public class ImgServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		map.put("status", "true");
+		print.print(g.toJson(map));
+		print.close();
 	}
 
 }

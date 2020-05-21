@@ -36,7 +36,7 @@ public class TaskService {
 		taskDao.addTask(task);
 		String status = "false";
 		if (task.getId() > 0) {
-			status = "true";
+			status = "task_" + task.getId();
 		}
 		Map<String, Object> map = new LinkedHashMap<String, Object>();
 

@@ -136,4 +136,22 @@ public class UserService {
 		return map;
 
 	}
+
+	public Map<String, Object> addStudyCourse(int userId, int courseId) {
+
+		String status = userDao.addStudyCourse(userId, courseId);
+		Map<String, Object> map = new LinkedHashMap<String, Object>();
+		map.put("status", status);
+		return map;
+
+	}
+
+	public Map<String, Object> delStudyCourse(int userId, int courseId) {
+
+		String status = userDao.delStudyCourse(userId, courseId);
+		Map<String, Object> map = new LinkedHashMap<String, Object>();
+		map.put("status", status);
+		return map;
+
+	}
 }
